@@ -8,9 +8,9 @@
     "title": "Grimório",
     "icon": "icon.svg",
     "popover": {
-      "url": "index.html",
-      "width": 500,
-      "height": 700
+      "url": "./index.html",
+      "height": 700,
+      "width": 500
     }
   }
 }
