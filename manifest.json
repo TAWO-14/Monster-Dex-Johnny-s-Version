@@ -7,10 +7,6 @@
   "action": {
     "title": "Grimório",
     "icon": "icon.svg",
-    "popover": {
-      "url": "./index.html",
-      "height": 700,
-      "width": 500
-    }
+    "popover": "index.html"
   }
 }
