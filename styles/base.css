@@ -148,27 +148,282 @@ footer {
   background: var(--text-muted);
 }
 
-.app-header {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.app-title {
-  font-size: 1.25rem; /* Reduz um pouco o tamanho gigante para caber */
-  white-space: nowrap;
-}
-
 /* Suporte para Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--border-subtle) var(--bg-deep);
 }
+
+/* Configuração geral do container do Popover */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Cabeçalho enxuto */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #2a2a2a;
+  padding-bottom: 10px;
+}
+
+.app-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f3c653;
+  margin: 0;
+}
+
+/* Navegação de abas (Combate / Bestiário) adaptada para celular/popover */
+.nav-tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-tab-btn {
+  flex: 1;
+  padding: 6px;
+  font-size: 0.85rem;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.nav-tab-btn.active {
+  background: #f3c653;
+  color: #121212;
+  font-weight: bold;
+  border-color: #f3c653;
+}
+
+/* Lista de Combatentes em formato de Cards verticais */
+#combat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.combatant-card {
+  background: #1a1a1a;
+  border: 1px solid #2c2c2c;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.combatant-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.combatant-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+/* Inputs compactos para Iniciativa e HP */
+.combatant-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.input-group input {
+  width: 50px;
+  background: #111;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  text-align: center;
+}
+
 html, body {
   width: 450px;
   height: 650px;
   margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  background-color: #121212; /* Ajuste para a cor de fundo do seu tema */
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: system-ui, sans-serif;
 }
+.combatant-card {
+  background: #1a1a1a;
+  border: 1px solid #2c2c2c;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#add-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #161616;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  margin-bottom: 12px;
+}
+
+#add-panel input, #add-panel div {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Oculta as setinhas (spinners) para cima/baixo dos inputs de número */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Reduz o espaçamento geral do aplicativo */
+body {
+  padding: 8px !important;
+  max-width: 420px;
+}
+
+.app-header {
+  margin-bottom: 8px !important;
+}
+
+/* Card compacto: tira a altura gigante e alinha tudo */
+.compact-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 6px;
+  background: #17181c;
+  border: 1px solid #2a2c33;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
+
+.compact-row.active-turn {
+  border-color: #f3c653;
+  box-shadow: 0 0 6px rgba(243, 198, 83, 0.25);
+}
+
+.compact-init-box input {
+  width: 36px;
+  height: 28px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: #0f1012;
+  border: 1px solid #363942;
+  border-radius: 4px;
+  color: #f3c653;
+}
+
+.compact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.compact-title-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.compact-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.compact-stats-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  color: #9aa0a6;
+}
+
+.compact-stats-line input {
+  background: #0f1012;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 0.78rem;
+  padding: 1px 2px;
+}
+
+.compact-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.hp-quick-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.hp-quick-group input {
+  width: 44px;
+  height: 20px;
+  background: #0f1012;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+.hp-quick-group button {
+  height: 20px;
+  padding: 0 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-dmg { background: #5c1d1d; color: #ff9999; }
+.btn-heal { background: #1d5c2b; color: #99ff99; }
