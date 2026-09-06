@@ -6,11 +6,11 @@
   "author": "Mestre",
   "action": {
     "title": "Grimório",
-    "icon": "/icon.svg",
+    "icon": "icon.svg",
     "popover": {
       "width": 500,
       "height": 700,
-      "url": "/"
+      "url": "index.html"
     }
   }
 }
