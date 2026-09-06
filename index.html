@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/components.css">
   <link rel="stylesheet" href="styles/combat.css">
-  <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+
+  <script src="https://owlbear.rodeo/sdk/v2/js"></script>
 </head>
 <body>
 
@@ -42,12 +42,20 @@
       </div>
     </div>
 
+    <!-- Painel com Toggle Switch -->
     <div class="add-panel hidden" id="add-panel">
       <div class="field"><label>Nome</label><input type="text" id="add-name" class="name-field" placeholder="Ex: Aragorn"></div>
       <div class="field"><label>Iniciativa</label><input type="number" id="add-init" value="10"></div>
       <div class="field"><label>CA</label><input type="number" id="add-ac" value="10"></div>
       <div class="field"><label>PV máximo</label><input type="number" id="add-hp" value="10"></div>
-      <div class="field"><label><input type="checkbox" id="add-ispc" checked style="width:auto;vertical-align:middle;"> Personagem jogador</label></div>
+      <div class="field">
+        <label>Tipo</label>
+        <label class="toggle-label">
+          <input type="checkbox" id="add-ispc" class="hidden" checked>
+          <span class="toggle-switch"></span>
+          <span>Jogador (PJ)</span>
+        </label>
+      </div>
       <button class="btn btn-primary" id="btn-confirm-add">Adicionar</button>
     </div>
 
@@ -79,8 +87,24 @@
       <div class="field"><label>PV máximo</label><input type="number" id="ed-hpmax"></div>
       <div class="field"><label>PV atual</label><input type="number" id="ed-hpcur"></div>
       <div class="field"><label>PV temporário</label><input type="number" id="ed-temphp"></div>
-      <div class="field"><label style="margin-top:22px;"><input type="checkbox" id="ed-ispc" style="width:auto;vertical-align:middle;"> Personagem jogador</label></div>
-      <div class="field"><label style="margin-top:22px;"><input type="checkbox" id="ed-conc" style="width:auto;vertical-align:middle;"> Concentrando</label></div>
+      
+      <div class="field">
+        <label>Papel</label>
+        <label class="toggle-label">
+          <input type="checkbox" id="ed-ispc" class="hidden">
+          <span class="toggle-switch"></span>
+          <span>Jogador</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>Magia</label>
+        <label class="toggle-label">
+          <input type="checkbox" id="ed-conc" class="hidden">
+          <span class="toggle-switch"></span>
+          <span>Concentrando</span>
+        </label>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-primary" id="btn-save-combatant">Salvar</button>
