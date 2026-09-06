@@ -148,6 +148,17 @@ footer {
   background: var(--text-muted);
 }
 
+.app-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.app-title {
+  font-size: 1.25rem; /* Reduz um pouco o tamanho gigante para caber */
+  white-space: nowrap;
+}
+
 /* Suporte para Firefox */
 * {
   scrollbar-width: thin;
