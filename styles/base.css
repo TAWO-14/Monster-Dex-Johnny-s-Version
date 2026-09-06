@@ -164,3 +164,11 @@ footer {
   scrollbar-width: thin;
   scrollbar-color: var(--border-subtle) var(--bg-deep);
 }
+html, body {
+  width: 450px;
+  height: 650px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #121212; /* Ajuste para a cor de fundo do seu tema */
+}
