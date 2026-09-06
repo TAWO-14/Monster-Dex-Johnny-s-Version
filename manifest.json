@@ -1,0 +1,15 @@
+{
+  "name": "Grimório de Combate",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "description": "Painel de combate integrado.",
+  "author": "Mestre",
+  "action": {
+    "title": "Grimório",
+    "popover": {
+      "width": 500,
+      "height": 700,
+      "url": "/"
+    }
+  }
+}
