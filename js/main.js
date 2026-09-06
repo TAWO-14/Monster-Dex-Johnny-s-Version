@@ -62,20 +62,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initApp();
   }
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof window.OBR !== 'undefined') {
-    window.OBR.onReady(async () => {
-      console.log("Conectado ao Owlbear Rodeo!");
-
-      // Força a janela do Owlbear a expandir para dimensões utilizáveis
-      await window.OBR.action.setPopoverWidth(480);
-      await window.OBR.action.setPopoverHeight(700);
-
-      initApp();
-    });
-  } else {
-    console.log("Modo Standalone iniciado.");
-    initApp();
-  }
-});
