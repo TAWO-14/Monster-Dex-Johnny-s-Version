@@ -105,31 +105,50 @@ function renderMonsterModal() {
 function monsterViewHtml(m) {
   const abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
   const labels = { str: 'FOR', dex: 'DES', con: 'CON', int: 'INT', wis: 'SAB', cha: 'CAR' };
-  
-  const abilitiesHtml = '<div class="sv-abilities">' + abilities.map((a) => {
-    return `<div class="sv-ability"><b>${m[a]} (${fmtMod(m[a])})</b>${labels[a]}</div>`;
-  }).join('') + '</div>';
+
+  const abilitiesHtml = `
+    <div class="sv-abilities">
+      ${abilities.map((a) => `
+        <div class="sv-ability">
+          <b>${m[a]} (${fmtMod(m[a])})</b>
+          <span>${labels[a]}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
 
   const line = (label, val) => val ? `<div class="sv-line"><b>${label}.</b> ${escapeHtml(val)}</div>` : '';
+
   const entries = (title, list) => {
     if (!list || list.length === 0) return '';
-    return `<div class="sv-block-title">${title}</div>` +
-      list.map((it) => `<div class="sv-entry"><b>${escapeHtml(it.name)}.</b> ${escapeHtml(it.text)}</div>`).join('');
+    const header = title ? `<div class="sv-block-title">${title}</div>` : '';
+    const body = list.map((it) => `
+      <div class="sv-entry">
+        <b>${escapeHtml(it.name)}.</b> ${escapeHtml(it.text)}
+      </div>
+    `).join('');
+    return header + body;
   };
+
+  const legendaryIntro = (m.legendaryActions && m.legendaryActions.length > 0)
+    ? `<div class="sv-entry">${m.legendaryNote ? escapeHtml(m.legendaryNote) : 'Pode realizar 3 ações lendárias, escolhendo entre as opções abaixo. Apenas uma pode ser usada por vez, no final do turno de outra criatura.'}</div>`
+    : '';
 
   return `
     <div class="modal-header">
       <h2 class="modal-title">${escapeHtml(m.name || 'Monstro')}</h2>
-      <button class="btn-icon" data-action="close-monster-modal">✕</button>
+      <button class="btn-icon" data-action="close-monster-modal" aria-label="Fechar">✕</button>
     </div>
     <div class="stat-view">
       <div class="sv-meta">${escapeHtml(m.size || '')} ${escapeHtml(m.type || '')}${m.alignment ? (', ' + escapeHtml(m.alignment)) : ''}</div>
       ${line('Classe de Armadura', m.ac + (m.acNote ? ' (' + m.acNote + ')' : ''))}
       ${line('Pontos de Vida', m.hpAvg + (m.hpDice ? ' (' + m.hpDice + ')' : ''))}
       ${line('Deslocamento', m.speed)}
+      
       <hr>
       ${abilitiesHtml}
       <hr>
+
       ${line('Resistência de testes', m.saves)}
       ${line('Perícias', m.skills)}
       ${line('Resistências a dano', m.resistances)}
@@ -139,11 +158,13 @@ function monsterViewHtml(m) {
       ${line('Sentidos', m.senses)}
       ${line('Idiomas', m.languages)}
       ${line('Nível de Desafio', m.cr)}
+
       ${entries('Traços', m.traits)}
       ${entries('Ações', m.actions)}
       ${entries('Ações Bônus', m.bonusActions)}
       ${entries('Reações', m.reactions)}
-      ${entries('Ações Lendárias', m.legendaryActions)}
+      ${(m.legendaryActions && m.legendaryActions.length > 0) ? `<div class="sv-block-title">Ações Lendárias</div>${legendaryIntro}` : ''}
+      ${entries('', m.legendaryActions)}
       ${m.notes ? `<div class="sv-notes">${escapeHtml(m.notes)}</div>` : ''}
     </div>
     <div class="modal-actions">
@@ -289,3 +310,4 @@ export function initBestiaryEvents() {
     if (e.target.id === 'monster-modal-overlay') closeMonsterModal();
   });
 }
+

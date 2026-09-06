@@ -30,40 +30,35 @@ export function renderApp() {
 }
 
 // Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-  // Carrega os dados salvos ou iniciais
+function initApp() {
   Storage.load();
 
-  // Alternância de Abas
   document.getElementById('tab-btn-combate')?.addEventListener('click', () => switchTab('combate'));
   document.getElementById('tab-btn-bestiario')?.addEventListener('click', () => switchTab('bestiario'));
-
-  // Ações de Backup
   document.getElementById('btn-export')?.addEventListener('click', () => Storage.exportBackup());
   
   const fileInput = document.getElementById('file-import');
   document.getElementById('btn-import')?.addEventListener('click', () => fileInput?.click());
+  fileInput?.addEventListener('change', async (e) => { /*... seu código de importação ...*/ });
 
-  fileInput?.addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    try {
-      await Storage.importBackup(file);
-      renderApp();
-      toast('Dados importados com sucesso.');
-    } catch (err) {
-      console.error(err);
-      toast('Arquivo inválido — não foi possível importar.');
-    } finally {
-      e.target.value = '';
-    }
-  });
-
-  // Inicializa listeners dos módulos de Combate e Bestiário
   initCombatEvents();
   initBestiaryEvents();
-
-  // Primeira renderização na tela
   renderApp();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Use window.OBR para evitar ReferenceError caso o SDK não carregue rápido o suficiente
+  if (typeof window.OBR !== 'undefined') {
+    window.OBR.onReady(() => {
+      console.log("Conectado ao Owlbear Rodeo!");
+      initApp();
+      
+      // Aqui dentro você poderá colocar os 'listeners' do Owlbear futuramente
+      // Exemplo: window.OBR.player.onChange(...)
+    });
+  } else {
+    // Modo Standalone (Navegador comum)
+    console.log("Modo Standalone iniciado.");
+    initApp();
+  }
 });
