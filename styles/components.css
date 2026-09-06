@@ -203,3 +203,93 @@ textarea:focus {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Layout Clássico do Statblock (Monster Manual) */
+.stat-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.925rem;
+  line-height: 1.45;
+  color: var(--text-main);
+}
+
+.sv-meta {
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.sv-line {
+  margin: 0.1rem 0;
+}
+
+.sv-line b {
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat-view hr {
+  border: 0;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0.6rem 0;
+}
+
+/* Tabela de Habilidades (6 Atributos) */
+.sv-abilities {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  text-align: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+}
+
+.sv-ability {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sv-ability b {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.sv-ability span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* Seções de Traços, Ações e Efeitos */
+.sv-block-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  border-bottom: 1px solid rgba(197, 155, 39, 0.25);
+  padding-bottom: 0.2rem;
+  margin-top: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.sv-entry {
+  margin-bottom: 0.5rem;
+}
+
+.sv-entry b {
+  font-style: italic;
+  font-weight: 700;
+  color: #fff;
+}
+
+.sv-notes {
+  margin-top: 0.75rem;
+  font-style: italic;
+  color: var(--text-muted);
+  border-left: 2px solid var(--border-gold);
+  padding-left: 0.75rem;
+}
