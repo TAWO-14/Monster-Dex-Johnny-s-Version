@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-deep: #0f1015;
+  --bg-surface: #181a20;
+  --bg-elevated: #22252e;
+  --border-subtle: #2d313b;
+  --border-gold: #c59b27;
+
+  --text-main: #f0f2f5;
+  --text-muted: #9aa1ad;
+  --text-gold: #e2b740;
+
+  --primary: #9e2a2b;
+  --primary-hover: #bd3a3c;
+  --primary-glow: rgba(158, 42, 43, 0.35);
+
+  --danger: #d72638;
+  --success: #2a9d8f;
+  --warning: #e76f51;
+  --info: #3a86ff;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at top center, #1b1e28 0%, var(--bg-deep) 70%);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 3rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Header */
+.app-header {
+  background-color: rgba(24, 26, 32, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.app-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(197, 155, 39, 0.3);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--bg-deep);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+}
+
+.tab-btn.active {
+  color: #fff;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+  border-bottom: none;
+}
