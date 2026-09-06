@@ -496,3 +496,34 @@ export function initCombatEvents() {
     if (e.target.id === 'combatant-modal-overlay') closeCombatantModal();
   });
 }
+
+// Função para atualizar a iniciativa diretamente no token físico do Owlbear Rodeo
+export async function syncInitiativeToOwlbear(combatantName, initiativeValue) {
+  // Se não estiver rodando dentro do Owlbear ou o SDK não estiver pronto, apenas ignora sem quebrar nada
+  if (!window.OBR || !OBR.isAvailable) return;
+
+  try {
+    // Pega todos os itens (tokens) presentes na cena atual do mapa
+    const items = await OBR.scene.items.getItems();
+
+    // Tenta encontrar um token no mapa cujo nome coincida com o combatente do Grimório
+    const targetItem = items.find(item => item.text?.plainText?.trim() === combatantName.trim() || item.name?.trim() === combatantName.trim());
+
+    if (targetItem) {
+      // Atualiza os metadados do token encontrado
+      await OBR.scene.items.updateItems([targetItem.id], (controller) => {
+        for (let item of controller) {
+          if (!item.metadata) item.metadata = {};
+          
+          // Chave de metadados de iniciativa padrão reconhecida por extensões do Owlbear
+          item.metadata["owlbear.rodeo/initiative"] = {
+            value: Number(initiativeValue)
+          };
+        }
+      });
+      console.log(`Iniciativa de ${combatantName} sincronizada com o token no mapa: ${initiativeValue}`);
+    }
+  } catch (error) {
+    console.error("Erro ao sincronizar iniciativa com o Owlbear:", error);
+  }
+}
