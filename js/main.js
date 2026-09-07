@@ -37,9 +37,24 @@ function initApp() {
   document.getElementById('tab-btn-bestiario')?.addEventListener('click', () => switchTab('bestiario'));
   document.getElementById('btn-export')?.addEventListener('click', () => Storage.exportBackup());
   
-  const fileInput = document.getElementById('file-import');
+const fileInput = document.getElementById('file-import');
   document.getElementById('btn-import')?.addEventListener('click', () => fileInput?.click());
-  fileInput?.addEventListener('change', async (e) => { /*... seu código de importação ...*/ });
+
+  fileInput?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      await Storage.importBackup(file);
+      renderApp();
+      toast('Backup importado com sucesso!');
+    } catch (err) {
+      console.error('Erro ao importar backup:', err);
+      toast('Erro ao importar arquivo de backup.');
+    } finally {
+      fileInput.value = '';
+    }
+  });
 
   initCombatEvents();
   initBestiaryEvents();
@@ -47,17 +62,17 @@ function initApp() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Use window.OBR para evitar ReferenceError caso o SDK não carregue rápido o suficiente
   if (typeof window.OBR !== 'undefined') {
-    window.OBR.onReady(() => {
+    window.OBR.onReady(async () => {
       console.log("Conectado ao Owlbear Rodeo!");
+
+      // Força a expansão do popover no Owlbear
+      await window.OBR.action.setPopoverWidth(480);
+      await window.OBR.action.setPopoverHeight(700);
+
       initApp();
-      
-      // Aqui dentro você poderá colocar os 'listeners' do Owlbear futuramente
-      // Exemplo: window.OBR.player.onChange(...)
     });
   } else {
-    // Modo Standalone (Navegador comum)
     console.log("Modo Standalone iniciado.");
     initApp();
   }
